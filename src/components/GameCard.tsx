@@ -10,7 +10,7 @@ interface IProps {
 
 const GameCard = ({ game }: IProps) => {
   return (
-    <Card borderRadius='10px' overflow='hidden'>
+    <Card borderRadius='10px' overflow='hidden' width='360px'>
       <Image src={getCroppedImageUrl(game.background_image)} alt={game.name} />
       <CardBody>
         <Heading fontSize='2xl'>{game.name}</Heading>

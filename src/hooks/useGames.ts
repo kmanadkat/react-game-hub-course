@@ -28,11 +28,13 @@ interface IFetchGamesResponse {
 const useGames = () => {
   const [games, setGames] = useState<IGame[]>([])
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const controller = new AbortController()
 
     const fetchGames = async () => {
+      setIsLoading(true)
       try {
         const response = await apiClient.get<IFetchGamesResponse>('/games', { signal: controller.signal })
         setGames(response.data.results)
@@ -40,6 +42,7 @@ const useGames = () => {
         if (error instanceof CanceledError) return
         setError((error as IError).message)
       }
+      setIsLoading(false)
     }
     fetchGames()
 
@@ -47,7 +50,7 @@ const useGames = () => {
     return () => controller.abort()
   }, [])
 
-  return { games, error }
+  return { games, error, isLoading }
 }
 
 export type { IGame, IPlatform }
