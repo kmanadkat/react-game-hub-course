@@ -2,27 +2,18 @@ import { useEffect, useState } from 'react'
 import apiClient from '../services/api-client'
 import { CanceledError } from 'axios'
 
-interface IPlatform {
+interface IGenre {
   id: number
   name: string
-  slug: string
 }
 
-interface IGame {
-  id: number
-  name: string
-  background_image: string
-  parent_platforms: { platform: IPlatform }[]
-  metacritic: number
-}
-
-interface IFetchGamesResponse {
+interface IFetchGenresResponse {
   count: number
-  results: IGame[]
+  results: IGenre[]
 }
 
-const useGames = () => {
-  const [games, setGames] = useState<IGame[]>([])
+const useGeneres = () => {
+  const [genres, setGenres] = useState<IGenre[]>([])
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -32,8 +23,8 @@ const useGames = () => {
     const fetchGames = async () => {
       setIsLoading(true)
       try {
-        const response = await apiClient.get<IFetchGamesResponse>('/games', { signal: controller.signal })
-        setGames(response.data.results)
+        const response = await apiClient.get<IFetchGenresResponse>('/genres', { signal: controller.signal })
+        setGenres(response.data.results)
       } catch (error) {
         if (error instanceof CanceledError) return
         setError((error as { message: string }).message)
@@ -46,9 +37,7 @@ const useGames = () => {
     return () => controller.abort()
   }, [])
 
-  return { games, error, isLoading }
+  return { genres, error, isLoading }
 }
 
-export type { IGame, IPlatform }
-
-export default useGames
+export default useGeneres
