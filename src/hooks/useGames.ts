@@ -2,10 +2,17 @@ import { useEffect, useState } from 'react'
 import apiClient from '../services/api-client'
 import { CanceledError } from 'axios'
 
+interface IPlatform {
+  id: number
+  name: string
+  slug: string
+}
+
 interface IGame {
   id: number
   name: string
   background_image: string
+  parent_platforms: { platform: IPlatform }[]
 }
 
 interface IError {
@@ -42,6 +49,6 @@ const useGames = () => {
   return { games, error }
 }
 
-export type { IGame }
+export type { IGame, IPlatform }
 
 export default useGames
