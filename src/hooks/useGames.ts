@@ -5,6 +5,7 @@ import { CanceledError } from 'axios'
 interface IGame {
   id: number
   name: string
+  background_image: string
 }
 
 interface IError {
@@ -40,5 +41,7 @@ const useGames = () => {
 
   return { games, error }
 }
+
+export type { IGame }
 
 export default useGames
