@@ -13,6 +13,7 @@ interface IGame {
   name: string
   background_image: string
   parent_platforms: { platform: IPlatform }[]
+  metacritic: number
 }
 
 interface IError {
