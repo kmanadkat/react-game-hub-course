@@ -6,7 +6,7 @@ interface IGenre {
   image_background: string
 }
 
-const useGeneres = () => useData<IGenre>('/generes')
+const useGeneres = () => useData<IGenre>('/genres')
 
 export type { IGenre }
 
