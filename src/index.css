@@ -1,3 +1,11 @@
 form {
   width: 100%;
 }
+
+html * {
+  transition: color, background-color 0.3s ease-out !important;
+}
+
+.chakra-switch__track[data-checked] {
+  background-color: #534cc6 !important;
+}
