@@ -1,11 +1,6 @@
 import useData from './useData'
 import { IGenre } from './useGenres'
-
-interface IPlatform {
-  id: number
-  name: string
-  slug: string
-}
+import { IPlatform } from './usePlatforms'
 
 interface IGame {
   id: number
@@ -15,11 +10,16 @@ interface IGame {
   metacritic: number
 }
 
-const useGames = (selectedGenre: IGenre | null) => {
-  const obj = { params: { genres: selectedGenre?.id } }
-  return useData<IGame>('/games', obj, [selectedGenre?.id])
+const useGames = (selectedGenre: IGenre | null, selectedPlatform: IPlatform | null) => {
+  const obj = {
+    params: {
+      genres: selectedGenre?.id,
+      parent_platforms: selectedPlatform?.id,
+    },
+  }
+  return useData<IGame>('/games', obj, [selectedGenre?.id, selectedPlatform?.id])
 }
 
-export type { IGame, IPlatform }
+export type { IGame }
 
 export default useGames

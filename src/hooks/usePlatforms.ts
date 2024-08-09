@@ -1,13 +1,15 @@
 import useData from './useData'
 
-interface IApiPlatform {
-  id: string
+interface IPlatform {
+  id: number
   name: string
   slug: string
 }
 
 const usePlatforms = () => {
-  return useData<IApiPlatform>('/platforms/lists/parents')
+  return useData<IPlatform>('/platforms/lists/parents')
 }
+
+export type { IPlatform }
 
 export default usePlatforms
