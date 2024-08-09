@@ -12,10 +12,16 @@ interface IGameQuery {
   genre: IGenre | null
   platform: IPlatform | null
   sortOrder: string
+  searchQuery: string
 }
 
 const App = () => {
-  const [gameQuery, setGameQuery] = useState<IGameQuery>({ genre: null, platform: null, sortOrder: '' })
+  const [gameQuery, setGameQuery] = useState<IGameQuery>({
+    genre: null,
+    platform: null,
+    sortOrder: '',
+    searchQuery: '',
+  })
 
   return (
     <Grid
@@ -25,7 +31,7 @@ const App = () => {
         lg: '300px 1fr',
       }}>
       <GridItem area='nav'>
-        <Navbar />
+        <Navbar onSearch={(value) => setGameQuery({ ...gameQuery, searchQuery: value })} />
       </GridItem>
       <Show above='lg'>
         <GridItem area='aside' paddingX={5}>
